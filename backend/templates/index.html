@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <div class="lg:col-span-3 space-y-8">
+        
+        <div class="border-b border-gray-700 pb-4">
+            <h2 class="text-3xl font-bold text-white">Featured Games</h2>
+            <p class="text-gray-400">Premium selection of Arcade & Logic puzzles.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-pink-500 transition shadow-lg group">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-2xl text-white group-hover:text-pink-400 transition">💎 Gem Crush</h3>
+                        <span class="text-xs bg-pink-900 text-pink-200 px-2 py-1 rounded">Casual</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm mb-6">Match colorful gems, trigger explosions, and rack up combos in this addictive puzzle game.</p>
+                {% if user %} <a href="/launch/gem" class="block text-center bg-pink-600 hover:bg-pink-500 text-white py-3 rounded font-bold shadow-md transition transform hover:scale-105">Play Now</a>
+                {% else %} <span class="block text-center border border-gray-600 py-2 rounded text-gray-500 text-sm">Login Required</span> {% endif %}
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-purple-500 transition shadow-lg group">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-2xl text-white group-hover:text-purple-400 transition">🔢 Sudoku Pro</h3>
+                        <span class="text-xs bg-purple-900 text-purple-200 px-2 py-1 rounded">Logic</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm mb-6">The ultimate number puzzle. Features pencil marks (Shift+Num) and smart difficulty generation.</p>
+                {% if user %} <a href="/launch/sudoku" class="block text-center bg-purple-600 hover:bg-purple-500 text-white py-3 rounded font-bold shadow-md transition transform hover:scale-105">Play Now</a>
+                {% else %} <span class="block text-center border border-gray-600 py-2 rounded text-gray-500 text-sm">Login Required</span> {% endif %}
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition shadow-lg group">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-2xl text-white group-hover:text-blue-400 transition">🃏 Memory Match</h3>
+                        <span class="text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded">Focus</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm mb-6">Test your brain power. Flip cards to find matching pairs before time runs out.</p>
+                {% if user %} <a href="/launch/memory" class="block text-center bg-blue-600 hover:bg-blue-500 text-white py-3 rounded font-bold shadow-md transition transform hover:scale-105">Play Now</a>
+                {% else %} <span class="block text-center border border-gray-600 py-2 rounded text-gray-500 text-sm">Login Required</span> {% endif %}
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-green-500 transition shadow-lg group">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="font-bold text-2xl text-white group-hover:text-green-400 transition">🐍 Neon Snake</h3>
+                        <span class="text-xs bg-green-900 text-green-200 px-2 py-1 rounded">Arcade</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm mb-6">Classic survival action with a modern neon glow aesthetic. Grow as long as you can!</p>
+                {% if user %} <a href="/launch/snake" class="block text-center bg-green-600 hover:bg-green-500 text-white py-3 rounded font-bold shadow-md transition transform hover:scale-105">Play Now</a>
+                {% else %} <span class="block text-center border border-gray-600 py-2 rounded text-gray-500 text-sm">Login Required</span> {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-700 h-fit sticky top-4">
+        <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-2">
+            <h2 class="text-xl font-bold text-yellow-400">🏆 Hall of Fame</h2>
+            <a href="/" class="text-blue-400 text-xs hover:underline uppercase tracking-wide">Refresh</a>
+        </div>
+        
+        {% if scores %}
+        <div class="space-y-3">
+            {% for score in scores %}
+            <div class="flex justify-between items-center p-2 rounded hover:bg-gray-700 transition">
+                <div class="flex items-center gap-3">
+                    <span class="font-mono text-gray-500 text-sm">#{{ loop.index }}</span>
+                    <div>
+                        <p class="text-blue-300 font-bold text-sm leading-tight">{{ score.username }}</p>
+                        <p class="text-gray-500 text-xs capitalize">{{ score.game_id }}</p>
+                    </div>
+                </div>
+                <span class="font-mono text-yellow-300 font-bold">{{ score.score }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-10">
+            <p class="text-gray-500 italic text-sm">No scores yet.</p>
+            <p class="text-gray-600 text-xs mt-1">Be the first legend!</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
